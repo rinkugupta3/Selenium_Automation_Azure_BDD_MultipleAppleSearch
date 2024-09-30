@@ -11,7 +11,7 @@ pipeline {
                 bat "C:/Users/dhira/AppData/Local/Programs/Python/Python311/python.exe -m pip install -r requirements.txt"
             }
         }
-        stage('Install WebDrier Browsers') {
+        stage('Install WebDriver Browsers') {
             steps {
                 bat "C:/Users/dhira/AppData/Local/Programs/Python/Python311/python.exe -m playwright install"
             }
