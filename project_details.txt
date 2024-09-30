@@ -1,0 +1,93 @@
+Project Overview:
+This project is a Behavior Driven Development (BDD) automation testing framework
+using Selenium WebDriver and pytest-bdd for testing Apple's website functionalities.
+It automates the process of searching for products, adding them to the shopping cart,
+taking screenshots at various steps, and removing the products from the cart.
+The project is structured around feature files written in Gherkin syntax that describe the test scenarios.
+
+Key Components:
+
+Framework & Tools Used:
+Selenium WebDriver: For browser automation.
+pytest-bdd: For implementing BDD-style test cases.
+WebDriver Manager: Manages the ChromeDriver installation.
+Python: The programming language for the test scripts.
+
+Features Automated:
+Search Products: Automates product searches on Apple's website (e.g., "iPhone 16 Pro" and "MacBook Pro").
+Add to Cart: Adds the first matching search result to the cart.
+Screenshot Capture: Takes screenshots at various points (after search, before proceeding to review, etc.).
+Remove from Cart: Removes the product from the shopping cart.
+Return to Homepage: Navigates back to the homepage after the cart operation.
+Browser Closure: Ensures the browser closes cleanly at the end of the tests.
+Project Structure:
+
+Test Code:
+The test cases are written using pytest-bdd, and the steps are defined in the Python code to interact
+with web elements using Selenium. The feature file drives the testing logic based on Gherkin syntax.
+
+Feature File (apple_search.feature): Defines scenarios for searching, adding products to the cart,
+taking screenshots, and returning to the homepage.
+
+Configuration File (config.py): Stores configuration details such as the Apple homepage URL and screenshot directory path.
+
+Scenario Outline: The project uses Scenario Outline in the Gherkin feature file to handle parameterized tests.
+For example, it allows testing the search and cart functionality for different products (iPhone 16 Pro and MacBook Pro).
+
+Automated Steps: The project uses Selenium WebDriver to perform the following steps for each product:
+
+Navigate to the homepage.
+Search for the product.
+Add the first search result to the cart.
+Proceed to the review cart page.
+Capture screenshots of the search and review pages.
+Remove the product from the cart.
+Return to the Apple homepage.
+Test Execution: The tests are executed using pytest, either from the command line or directly from the script. Screenshots are saved in a specific directory for each step.
+
+Code Highlights:
+Feature File (apple_search.feature):
+
+gherkin
+Copy code
+Feature: Apple Search and Cart
+
+  Scenario Outline: Search and add product to cart
+    Given I am on the Apple homepage
+    When I search for the "<product>"
+    Then a screenshot of the search "<product>" should be taken
+    When I add the first "<product>" result to the bag
+    Then I should be able to proceed to the review bag
+    Then a screenshot of the reviewed "<product>" should be taken
+    Then the "<product>" should be removed or deleted from the bag
+    Then I return to the Apple homepage
+
+    Examples:
+      | product123   |
+      | iPhone 16 Pro|
+      | MacBook Pro  |
+
+  Scenario: Close the browser
+    Then I close the browser
+Python Code: The steps are implemented using the pytest-bdd decorators:
+
+python
+Copy code
+@given("I am on the Apple homepage")
+def open_apple_homepage(browser):
+    browser.get(Config.HOMEPAGE_URL)
+
+@when(parsers.parse('I search for the "{product}"'))
+def search_for_product(browser, product):
+    search_input = browser.find_element(By.CSS_SELECTOR, ".globalnav-searchfield-input")
+    search_input.send_keys(product)
+    search_input.send_keys(Keys.ENTER)
+
+@then(parsers.parse('a screenshot of the search "{product}" should be taken'))
+def take_search_screenshot(browser, product):
+    browser.save_screenshot(f'{product}_search.png')
+Conclusion:
+This project provides a comprehensive test automation solution for Apple's product search and cart operations.
+It leverages BDD for better collaboration and understanding of the tests,
+while Selenium ensures the tests interact with the web elements effectively.
+The project can be extended to include more products and scenarios as needed.
