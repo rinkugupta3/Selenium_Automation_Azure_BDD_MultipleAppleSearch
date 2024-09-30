@@ -11,12 +11,12 @@ pipeline {
                 bat "C:/Users/dhira/AppData/Local/Programs/Python/Python311/python.exe -m pip install -r requirements.txt"
             }
         }
-        stage('Install Playwright Browsers') {
+        stage('Install WebDrier Browsers') {
             steps {
                 bat "C:/Users/dhira/AppData/Local/Programs/Python/Python311/python.exe -m playwright install"
             }
         }
-        stage('Dev - Env Playwright Tests') {
+        stage('main Selenium BDD Tests') {
             steps {
                 bat "C:/Users/dhira/AppData/Local/Programs/Python/Python311/python.exe -m pytest --html=reportbdd.html"
             }
