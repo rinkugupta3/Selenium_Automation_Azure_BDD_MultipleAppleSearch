@@ -1,4 +1,6 @@
-# pytest -s tests/test_apple_product_search.py
+# pytest -s interactive_tests/apple_product_search.py
+# This test require user input either Macbook or iPhone 16
+
 import os
 from pytest_bdd import given, when, then, scenarios
 import time
@@ -12,8 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from config.config import Config  # Import the Config class from config.py
 
 # Ensure the screenshots directory exists
-screenshots_dir = 'C:\\Users\\dhira\\Desktop\\Dhiraj HP ' \
-                  'Laptop\\Projects\\Selenium_Automation_Azure_BDD_MultipleAppleSearch\\screenshots'
+screenshots_dir = '/screenshots'
 if not os.path.exists(screenshots_dir):
     os.makedirs(screenshots_dir)
 

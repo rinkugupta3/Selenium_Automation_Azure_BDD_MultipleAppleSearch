@@ -12,7 +12,7 @@ Feature: Apple Search and Cart
     Then I return to the Apple homepage
 
     Examples:
-      | product123     |
+      | product     |
       | iPhone 16 Pro |
       | MacBook Pro |
 
