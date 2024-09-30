@@ -1,4 +1,4 @@
-# pytest -s tests/apple_product_search.py
+# pytest -s tests/test_apple_product_search.py
 import os
 from pytest_bdd import given, when, then, scenarios
 import time

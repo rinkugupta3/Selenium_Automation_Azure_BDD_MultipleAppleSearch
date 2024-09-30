@@ -11,10 +11,10 @@ More details listed in project_details.txt file
 # The browser should not close between the MacBook Pro and iPhone tests.
 # The same browser instance should be used for all scenarios
 # Run test with command:
-# pytest -v -s tests/apple_product_search_bdd_gerkin_cucumber.py --product=MacBook
-# pytest -v -s tests/apple_product_search_bdd_gerkin_cucumber.py
-# pytest -v tests/apple_product_search_bdd_gerkin_cucumber.py
-# pytest -v -s tests/apple_product_search_bdd_gerkin_cucumber.py --html=reportbdd.html
+# pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py --product=MacBook
+# pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py
+# pytest -v tests/test_apple_product_search_bdd_gerkin_cucumber.py
+# pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py --html=reportbdd.html
 
 import os
 import sys
