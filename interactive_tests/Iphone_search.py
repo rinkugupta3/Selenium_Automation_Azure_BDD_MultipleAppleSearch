@@ -3,7 +3,7 @@
 # JavaScript clicks bypass the issues like....
 # (Element not fully visible, Hidden by another element, special styling)
 # since they directly invoke the .click() event on the element.
-# pytest -s tests/test_Iphone_search.py
+# pytest -s tests/Iphone_search.py
 
 import time
 from selenium import webdriver

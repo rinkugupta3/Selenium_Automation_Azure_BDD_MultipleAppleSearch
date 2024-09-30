@@ -1,5 +1,5 @@
 # To get new chrome driver https://googlechromelabs.github.io/chrome-for-testing/#stable
-# pytest -s tests/test_Macbook_search.py
+# pytest -s tests/Macbook_search.py
 
 import time  # Import time to use sleep
 from selenium import webdriver
