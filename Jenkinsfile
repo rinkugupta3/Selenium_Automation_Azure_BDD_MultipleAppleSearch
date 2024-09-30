@@ -4,7 +4,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'stage', url: 'https://github.com/rinkugupta3/Selenium_Automation_Azure_BDD_MultipleAppleSearch'
-                // git branch: 'main', url: 'https://github.com/rinkugupta3/Selenium_Automation_Azure_BDD_MultipleAppleSearch'
             }
         }
         stage('Set up Python environment') {
