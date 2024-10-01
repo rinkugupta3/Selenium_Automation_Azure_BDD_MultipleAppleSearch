@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+      - main  # Change this if you're working with another branch
+
+pool:
+  vmImage: 'windows-latest'  # Uses a Windows machine to match your Jenkins setup
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'  # Make sure the version matches your Python 3.11 setup
+      addToPath: true
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+    displayName: 'Install Python Dependencies'
+
+  - script: |
+      python -m playwright install
+    displayName: 'Install Playwright Browsers'
+
+  - script: |
+      python -m pytest --html=reportbdd.html
+    displayName: 'Run Selenium BDD Tests'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'reportbdd.html'  # Publish the test report
+      ArtifactName: 'TestReport'
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'screenshots'
+      artifactName: 'Screenshots'
