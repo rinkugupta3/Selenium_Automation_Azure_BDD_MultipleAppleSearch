@@ -15,7 +15,7 @@ steps:
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
-      pip install pytest-html  # Ensure pytest-html is installed
+      pip install pytest-html
     displayName: 'Install Python Dependencies'
 
   - script: |
