@@ -15,6 +15,7 @@ More details listed in project_details.txt file
 # pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py
 # pytest -v tests/test_apple_product_search_bdd_gerkin_cucumber.py
 # pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py --html=reportbdd.html
+# For Azure devOps test need to run in headless mode "pytest --headless"
 
 import os
 import sys
@@ -48,9 +49,18 @@ if not os.path.exists(screenshots_dir):
 
 # Fixture for WebDriver either module or session
 @pytest.fixture(scope='module')
-def browser():
+def browser(request):
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--window-size=1920,1080")
+
+    # Enable headless mode if the --headless option is set
+    if request.config.getoption("--headless"):
+        chrome_options.add_argument("--headless")
+        print("Running in headless mode")  # Add this line to confirm headless mode
+    else:
+        print("Running in normal mode")
+
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
