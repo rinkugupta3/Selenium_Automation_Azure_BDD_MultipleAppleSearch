@@ -51,6 +51,7 @@ if not os.path.exists(screenshots_dir):
 def browser():
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
+    chrome_options.add_argument("--headless")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
