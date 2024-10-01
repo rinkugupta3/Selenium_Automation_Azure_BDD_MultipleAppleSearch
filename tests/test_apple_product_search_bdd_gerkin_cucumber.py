@@ -15,6 +15,7 @@ More details listed in project_details.txt file
 # pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py
 # pytest -v tests/test_apple_product_search_bdd_gerkin_cucumber.py
 # pytest -v -s tests/test_apple_product_search_bdd_gerkin_cucumber.py --html=reportbdd.html
+# pytest --headless
 
 import os
 import sys
@@ -51,7 +52,7 @@ if not os.path.exists(screenshots_dir):
 def browser():
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
     yield driver
