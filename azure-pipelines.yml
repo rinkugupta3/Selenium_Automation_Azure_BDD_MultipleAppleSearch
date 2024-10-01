@@ -15,11 +15,12 @@ steps:
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
+      pip install pytest-html  # Ensure pytest-html is installed
     displayName: 'Install Python Dependencies'
 
   - script: |
       python -m playwright install
-    displayName: 'Install Playwright Browsers'
+    displayName: 'Install Playwright Dependencies'
 
   - script: |
       python -m pytest --html=reportbdd.html
