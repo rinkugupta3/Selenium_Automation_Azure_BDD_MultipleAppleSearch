@@ -21,5 +21,6 @@ pytest-bdd==7.2.0
 six==1.16.0
 typing_extensions==4.12.2
 zipp==3.19.2
-product~=0.1.1.1
-config~=0.5.1
+product==0.1.1.1
+config==0.5.1
+
