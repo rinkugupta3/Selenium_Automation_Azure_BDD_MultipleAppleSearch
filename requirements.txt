@@ -1,5 +1,6 @@
 selenium==4.15.0
 webdriver_manager==4.0.2
+pytest-html==4.1.1
 astunparse==1.6.3
 attrs==24.2.0
 colorama==0.4.6
@@ -22,4 +23,3 @@ typing_extensions==4.12.2
 zipp==3.19.2
 product~=0.1.1.1
 config~=0.5.1
-pytest-html==4.1.1
