@@ -55,6 +55,10 @@ def browser():
     # chrome_options.add_argument("--headless")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
+
+    # Clear cookies before starting the test
+    driver.delete_all_cookies()
+
     yield driver
     driver.quit()
 
@@ -195,10 +199,15 @@ def select_and_buy_iphone(browser):
     browser.execute_script("arguments[0].click();", iphone_carrier)
     time.sleep(2)  # Wait 2 seconds before clicking
 
+    # Scroll down after carrier selection to reveal the next option
+    browser.execute_script("window.scrollBy(0, 500);")
+    time.sleep(2)  # Add a slight delay to ensure scrolling completes
+
     # Click on iPhone apple care
     iphone_apple_care = WebDriverWait(browser, 20).until(
-        EC.element_to_be_clickable((By.ID, "applecareplus_58_noapplecare_label")))
+        EC.element_to_be_clickable((By.CSS_SELECTOR, '#applecareplus_59_noapplecare_label')))
     browser.execute_script("arguments[0].click();", iphone_apple_care)
+
     browser.execute_script("window.scrollTo(0, 3200);")
     time.sleep(3)  # Wait 3 seconds before clicking
 
