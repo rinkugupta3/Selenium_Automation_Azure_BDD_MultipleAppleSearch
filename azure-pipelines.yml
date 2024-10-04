@@ -6,40 +6,54 @@ trigger:
 pool:
   vmImage: 'windows-latest'  # Uses a Windows machine to match your Jenkins setup
 
+variables:
+  PipCache: $(Pipeline.Workspace)/.pip_cache  # Define the cache path
+
 steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: '3.11'  # Make sure the version matches your Python 3.11 setup
       addToPath: true
 
+  # Create Pip Cache Directory
+  - script: |
+      mkdir "$(PipCache)" || echo "Cache directory already exists"
+    displayName: 'Create Pip Cache Directory'
+
+  # Cache Python packages to speed up subsequent runs
+  - task: Cache@2
+    inputs:
+      key: 'python | "$(Agent.OS)" | requirements.txt'
+      restoreKeys: |
+        python | "$(Agent.OS)"
+      path: $(PipCache)  # Define the cache path
+    continueOnError: true  # Allow pipeline to continue even if cache misses or errors
+
+  # Install Python dependencies
   - script: |
       python -m pip install --upgrade pip
       pip install -r requirements.txt
       pip install pytest-html
     displayName: 'Install Python Dependencies'
 
+  # Install Playwright dependencies
   - script: |
       python -m playwright install
     displayName: 'Install Playwright Dependencies'
 
+  # Run Selenium BDD tests and generate an HTML report
   - script: |
       python -m pytest --html=reportbdd.html
     displayName: 'Run Selenium BDD Tests'
 
+  # Publish the HTML report as a build artifact
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: 'reportbdd.html'  # Publish the test report
       ArtifactName: 'TestReport'
 
+  # Publish screenshots folder as pipeline artifacts
   - task: PublishPipelineArtifact@1
     inputs:
       targetPath: 'screenshots'
       artifactName: 'Screenshots'
-
-  - task: Cache@2
-    inputs:
-      key: 'python | "$(Agent.OS)" | requirements.txt'
-      restoreKeys: |
-        python | "$(Agent.OS)"
-      path: $(PIP_CACHE)
-    continueOnError: true

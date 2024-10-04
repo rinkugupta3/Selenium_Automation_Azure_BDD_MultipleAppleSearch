@@ -52,7 +52,7 @@ if not os.path.exists(screenshots_dir):
 def browser():
     chrome_options = Options()
     chrome_options.add_argument("--start-maximized")
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
@@ -161,6 +161,7 @@ def select_and_buy_iphone(browser):
     # Click on the 'Buy' button
     buy_button = WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.LINK_TEXT, "Buy")))
     browser.execute_script("arguments[0].click();", buy_button)
+    time.sleep(2)  # Wait 2 seconds before clicking
 
     # Click on iPhone 16 Pro or Pro Max
     iphone_model = WebDriverWait(browser, 20).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#\\3Ar7\\3A_label "
